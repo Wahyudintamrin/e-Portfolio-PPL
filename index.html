@@ -3,504 +3,736 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Portfolio UTS PPL Terbimbing - PPG 2026</title>
+    <title>E-Portfolio | Roesmang</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
                     },
                     colors: {
-                        ppg: {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            500: '#14b8a6', // Teal main color
-                            600: '#0d9488',
-                            700: '#0f766e',
-                            900: '#134e4a',
-                        }
+                        primary: '#1e40af', // Blue-800
+                        secondary: '#0f766e', // Teal-700
+                        accent: '#f59e0b', // Amber-500
+                        bglight: '#f8fafc',
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Custom scrollbar for a cleaner look */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
         }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-ppg-500 selection:text-white">
+<body class="bg-bglight text-slate-800 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50 transition-all duration-300">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-nav border-b border-gray-200 shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="font-bold text-xl text-ppg-700">UTS-PPLT-<span class="text-gray-800">WAHYUDIN</span></span>
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+    <img src="logo-ppg.png" 
+         alt="Logo PPL Terbimbing" 
+         class="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+    />
                 </div>
+                
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8">
-                    <a href="#beranda" class="text-gray-600 hover:text-ppg-600 font-medium transition">Beranda</a>
-                    <a href="#profil" class="text-gray-600 hover:text-ppg-600 font-medium transition">Profil</a>
-                    <a href="#artefak" class="text-gray-600 hover:text-ppg-600 font-medium transition">Artefak</a>
-                    <a href="#refleksi" class="text-gray-600 hover:text-ppg-600 font-medium transition">Refleksi</a>
-                    <a href="#dokumentasi" class="text-gray-600 hover:text-ppg-600 font-medium transition">Galeri</a>
+                <div class="hidden md:flex items-center space-x-1 lg:space-x-4">
+                    <button data-target="beranda" class="nav-link px-3 py-2 text-sm font-medium transition-colors border-b-2 border-transparent hover:text-primary active-nav">Beranda</button>
+                    <button data-target="profil" class="nav-link px-3 py-2 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:text-primary">Profil</button>
+                    <button data-target="analisis" class="nav-link px-3 py-2 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:text-primary">Analisis Artefak</button>
+                    <button data-target="penilaian" class="nav-link px-3 py-2 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:text-primary">Penilaian</button>
+                    <button data-target="model-guru" class="nav-link px-3 py-2 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:text-primary">Model Guru</button>
+					<button data-target="refleksi" class="nav-link px-3 py-2 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:text-primary">Refleksi</button>
+                    <button data-target="dokumentasi" class="nav-link px-3 py-2 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:text-primary">Dokumentasi</button>
                 </div>
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-ppg-600 focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-500 hover:text-primary focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-lg">
-                <a href="#beranda" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ppg-600 hover:bg-ppg-50">Beranda</a>
-                <a href="#profil" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ppg-600 hover:bg-ppg-50">Profil</a>
-                <a href="#artefak" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ppg-600 hover:bg-ppg-50">Artefak</a>
-                <a href="#refleksi" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ppg-600 hover:bg-ppg-50">Refleksi</a>
-                <a href="#dokumentasi" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ppg-600 hover:bg-ppg-50">Galeri</a>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+                <button data-target="beranda" class="nav-link-mobile block px-3 py-3 text-base font-medium text-primary bg-indigo-50 rounded-md text-left">Beranda</button>
+                <button data-target="profil" class="nav-link-mobile block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-indigo-50 rounded-md text-left">Profil Mahasiswa</button>
+                <button data-target="analisis" class="nav-link-mobile block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-indigo-50 rounded-md text-left">Analisis Artefak</button>
+                <button data-target="penilaian" class="nav-link-mobile block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-indigo-50 rounded-md text-left">Lampiran Penilaian</button>
+                <button data-target="model-guru" class="nav-link-mobile block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-indigo-50 rounded-md text-left">Model Guru</button>
+				<button data-target="Refleksi" class="nav-link px-3 py-2 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:text-primary">Refleksi</button>
+                <button data-target="dokumentasi" class="nav-link-mobile block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-indigo-50 rounded-md text-left">Dokumentasi Kegiatan</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="beranda" class="pt-28 pb-16 md:pt-36 md:pb-24 relative overflow-hidden bg-gradient-to-br from-ppg-900 to-ppg-700 text-white">
-        <!-- Decorative Background -->
-        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-            <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="w-full h-full">
-                <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="white" stroke-width="0.5" stroke-dasharray="2,2"></path>
-                <circle cx="20" cy="30" r="10" fill="white"></circle>
-                <circle cx="80" cy="70" r="15" fill="white"></circle>
-            </svg>
-        </div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto">
-                <span class="inline-block py-1 px-3 rounded-full bg-ppg-500/30 text-ppg-100 text-sm font-semibold tracking-wider mb-4 border border-ppg-400/30">
-                    TUGAS UTS PPL TERBIMBING
-                </span>
-                <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-                    E-Portfolio <span class="text-ppg-100">Wahyudin</span>
-                </h1>
-                <p class="text-lg md:text-xl text-ppg-50 mb-8 font-light">
-                    E-Portfolio ini bertujuan untuk memberikan refleksi awal sebagai fondasi dasar karakter mahasiswa yang  disajikan dalam bentuk profil mahasiswa, artefak produk rencana dan perangkat pembelajaran, jurnal refleksi, dan dokumentasi PPL Terbimbing.
-                </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#profil" class="px-6 py-3 bg-white text-ppg-700 font-semibold rounded-lg shadow-lg hover:bg-gray-50 transition duration-300">
-                        Mulai Jelajahi
-                    </a>
-                    <a href="#artefak" class="px-6 py-3 bg-ppg-600 text-white font-semibold rounded-lg shadow-lg border border-ppg-500 hover:bg-ppg-500 transition duration-300">
-                        Lihat Artefak
-                    </a>
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-24 pb-12 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- 1. HALAMAN BERANDA -->
+        <section id="beranda" class="page-section opacity-0 animate-fade-in">
+            <div class="flex flex-col-reverse lg:flex-row items-center gap-12 mt-10">
+                <div class="flex-1 space-y-6">
+                    <div class="inline-block px-4 py-1.5 bg-indigo-100 text-primary font-medium rounded-full text-sm">
+                        
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-slate-900">
+                        E-Portfolio <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Roesmang</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 leading-relaxed max-w-2xl font-serif">
+                        Selamat datang di E-Portfolio Roesmang. Website ini merupakan ruang refleksi awal yang menjadi fondasi dasar dalam membentuk karakter saya sebagai mahasiswa PPG calon guru menuju guru yang profesional, reflektif, dan inovatif.
+                    </p>
+                    <div class="pt-4 flex gap-4">
+                        <button onclick="document.querySelector('[data-target=\'profil\']').click()" class="bg-primary hover:bg-blue-900 text-white px-6 py-3 rounded-lg font-medium transition shadow-lg shadow-blue-900/20 flex items-center gap-2">
+                            Mulai Eksplorasi <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex-1 w-full relative">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-3xl transform rotate-3 scale-105"></div>
+                    <!-- Placeholder untuk foto ilustrasi/sekolah -->
+                    <img src="Mengajar.jpeg" alt="Wawancara Murid" class="relative rounded-3xl shadow-2xl object-cover h-[400px] md:h-[500px] w-full border-4 border-white">
                 </div>
             </div>
-        </div>
-        
-        <!-- Wave Divider -->
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-            <svg class="relative block w-full h-[50px] md:h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.29,200.4,111.45,263.2,104.22,321.39,56.44,321.39,56.44Z" fill="#f9fafb"></path>
-            </svg>
-        </div>
-    </section>
+        </section>
 
-    <!-- Profil Section -->
-    <section id="profil" class="py-16 md:py-24 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900">Profil Mahasiswa</h2>
-                <div class="h-1 w-20 bg-ppg-500 mx-auto mt-4 rounded"></div>
+        <!-- 2. PROFIL MAHASISWA -->
+        <section id="profil" class="page-section hidden opacity-0">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-3">Profil Mahasiswa</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
             </div>
 
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-                <div class="flex flex-col md:flex-row">
-                    <!-- Foto -->
-
-<div class="md:w-1/3 bg-gray-100 flex items-center justify-center p-8 relative">
-    <div class="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-white shadow-lg overflow-hidden bg-gray-200">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEHjdFbNnEOwqQ4bGX9BWsxzGiwEQTlcN-mM0lvtF3V46KmLkiJz85g3dQwgk_WHn_Va6qHj05jW2ZWRFKTc6UnzX6HVd6idKD5rNAVYAryLDOqzgZJ5BhbE7cGeKcquh763PjvythvIaw1aVYAu_Zlh0MBpx9EcBGIM7Nl6D9DDgjbw/s1600/Foto%20Profil.JPG" alt="Foto Wahyudin" class="w-full h-full object-cover">
-    </div>
-</div>
-                    
-                    <!-- Detail Data -->
-                    <div class="md:w-2/3 p-8 md:p-10">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Wahyudin</h3>
-                        <p class="text-ppg-600 font-medium mb-6">Perkenalkan saya Wahyudin, akrab disapa Wahyu. Saya berasal dari Kabupaten Maros, daerah yang memiliki situs prasejarah tertua dan kawasan karst terbesar ke-2 dunia.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-12">
+                    <!-- Bagian Kiri: Foto & Quote -->
+                    <div class="col-span-1 lg:col-span-4 bg-slate-50 p-8 flex flex-col items-center justify-center border-r border-gray-100">
+                        <div class="w-48 h-48 rounded-full border-4 border-white shadow-lg overflow-hidden mb-6 relative group">
+                            <!-- Ganti dengan foto profil asli -->
+                            <img src="poto-profil.jpg" alt="Foto Profil" class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
+                        </div>
                         
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
-                                <p class="text-sm text-gray-500 font-medium">Nomor Induk Mahasiswa</p>
-                                <p class="font-semibold text-gray-900">2590074950854</p>
+			<h3 class="text-2xl font-bold text-slate-800 mb-6">ROESMANG</h3>
+			<p class="text-secondary font-medium mb-1">Kontak:</p>
+			<a href="ruzmaaan97@gmail.com" class="flex items-center gap-2 text-slate-500 hover:text-primary transition text-sm mb-2">
+				<i class="fa-regular fa-envelope"></i> ruzmaan97@gmail.com
+			</a>
+			<a href="https://wa.me/qr/ZAZDGTRO57V6D1" class="flex items-center gap-2 text-slate-500 hover:text-primary transition text-sm mb-6">
+				<i class="fa-brands fa-whatsapp"></i> +6285396188313
+			</a>
+			<p class="text-secondary font-medium mb-1">Alamat:</p>
+			<a href="https://maps.app.goo.gl/chxbxZcknRpdRHQC7?g_st=ac" class="flex items-center gap-2 text-slate-500 hover:text-primary transition text-sm mb-2">
+				<i class="fas fa-map"></i> Dusun Bukit Asri, Pasangkayu, Sulawesi Barat
+			</a>
+
+                        <blockquote class="text-center font-serif italic text-slate-600 mt-auto px-4 border-t border-gray-200 pt-6">
+                            "Guru yang sejati adalah dia yang tidak pernah berhenti belajar, dan menjadikan setiap ruang kelas sebagai cermin refleksi diri."
+                        </blockquote>
+                    </div>
+
+                    <!-- Bagian Kanan: Biodata & Narasi -->
+                    <div class="col-span-1 lg:col-span-8 p-8 md:p-12">
+                        <h4 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2 flex items-center gap-2">
+                            <i class="fa-regular fa-id-card text-primary"></i> Data Diri Akademik
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 mb-8">
+                            <div>
+                                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Nomor Induk Mahasiswa</p>
+                                <p class="font-medium text-slate-800">2590074950853</p>
                             </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
-                                <p class="text-sm text-gray-500 font-medium">Bidang Studi / Kelas</p>
-                                <p class="font-semibold text-gray-900">Teknik Otomotif / Vokasi</p>
+                            <div>
+                                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">LPTK PPG</p>
+                                <p class="font-medium text-slate-800">Universitas Negeri Makassar</p>
                             </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
-                                <p class="text-sm text-gray-500 font-medium">LPTK Penyelenggara</p>
-                                <p class="font-semibold text-gray-900">Universitas Negeri Makassar</p>
+                            <div>
+                                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Bidang Studi</p>
+                                <p class="font-medium text-slate-800">Teknik Otomotif</p>
                             </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
-                                <p class="text-sm text-gray-500 font-medium">Sekolah Mitra</p>
-                                <p class="font-semibold text-gray-900">SMK Negeri 3 Makassar</p>
+                            <div>
+                                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Lokasi PPL Terbimbing</p>
+                                <p class="font-medium text-slate-800">SMK Negeri 3 Makassar</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Dosen Pendamping Lapangan</p>
+                                <p class="font-medium text-slate-800">Ir. Wabdillah, S.Pd., M.Pd.</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Guru Pamong</p>
+                                <p class="font-medium text-slate-800">Imran Madjid, S.Pd., M.Si., M.Pd.</p>
                             </div>
                         </div>
 
-                        <div class="space-y-4">
-                            <h4 class="font-bold text-gray-900 border-b pb-2">Inspirasi & Tujuan Ingin Jadi Guru Profesional</h4>
-                            <p class="text-gray-600 italic">
-                                "Menjadi pendidik yang fasilitatif dan inspiratif, mampu menciptakan lingkungan belajar yang berpusat pada peserta didik, serta terus berinovasi dalam mengimplementasikan Kurikulum Merdeka demi mewujudkan Profil Pelajar Pancasila."
-                            </p>
+                        <h4 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2 flex items-center gap-2 mt-8">
+                            <i class="fa-solid fa-map-location-dot text-primary"></i> Asal & Keunikan Daerah
+                        </h4>
+                        <p class="text-slate-600 leading-relaxed mb-8">
+                            Saya berasal dari <strong>Kabupaten Pasangkayu</strong>. Pasangkayu merupakan daerah transmigrasi yang terdapat beberapa agama dan suku yang hidup berdampingan dalam kemajemukan. Dalam kemajemukan masyarakat hidup dengan menjunjung tinggi toleransi.Pasangkayu merupakan salah satu daerah yang indonesia yang memiliki perkebunan kelapa sawit yang luas dimana perkebuna kelapa sawit hampir terdapat disemua kecamatan yang ada di kabupaten pasangkayu.
+                        </p>
+
+                        <h4 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-seedling text-primary"></i> Inspirasi & Tujuan Menjadi Guru Profesional
+                        </h4>
+                        <p class="text-slate-600 leading-relaxed">
+                            Selain karena background pendidikan saya adalah keguruan, motivasi ingin menjadi guru profesional adalah dampak yang dihasilkan dari mendidik. Hasil pekerjaan guru bisa berdampak jangka panjang dan menjadi amal jariyah kedepannya. Bagi saya, menjadi guru bukan hanya sekadar pekerjaan, tapi ladang pahal bagi saya.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ANALISIS ARTEFAK PEMBELAJARAN -->
+        <section id="analisis" class="page-section hidden opacity-0">
+            <div class="mb-10 text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900 mb-3">Analisis Artefak Pembelajaran</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-600 font-serif">
+                    Bagian ini memuat refleksi dan analisis mendalam terhadap produk pembelajaran (Perangkat Ajar, Media, atau Asesmen) yang telah disusun selama pelaksanaan PPL.
+                </p>
+            </div>
+			<!-- <div class="grid grid-cols-1 md:grid-cols-1 gap-6 lg:gap-8"> -->
+				<div class="bg-white rounded-xl p-8 mb-6 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-black-400 group">
+                    <div class="w-12 h-12 bg-black-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-book text-2xl text-black-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Analisis Perangkat Pembelajaran Siklus 1</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Selama penyusunan produk pembelajaran, kendala utama yang saya alami adalah kesulitan memetakan karakteristik dan kesiapan belajar peserta didik secara komprehensif. Di kelas tempat saya melaksanakan PPL, peserta didik memiliki rentang kemampuan kognitif dan gaya belajar yang sangat heterogen. Meskipun saya sudah melakukan asesmen diagnostik di awal, merumuskan rancangan pembelajaran berdiferensiasi (baik diferensiasi konten maupun proses) ke dalam Modul Ajar dan LKPD ternyata sangat menantang. Saya kesulitan menemukan titik keseimbangan antara menyederhanakan materi untuk siswa yang masih slow learner tanpa membuat siswa yang fast learner merasa bosan, sehingga proses penyusunan instrumen dan aktivitas belajar memakan waktu jauh lebih lama dari yang saya perkirakan.
+                    </p>
+	<a href="https://drive.google.com/drive/folders/1dXRJYElzcx1GEHI5D4WIXknBTvt8wHS4?usp=drive_link"><button class="w-full mt-auto py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i> Unduh / Lihat Dokumen Lengkap
+                    </button></a>
+                </div>
+			<!-- </div> -->
+			<!-- <div class="grid grid-cols-1 md:grid-cols-1 gap-6 lg:gap-8"> -->
+				<div class="bg-white rounded-xl p-8 mb-6 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-black-400 group">
+                    <div class="w-12 h-12 bg-black-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-book text-2xl text-black-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Analisis Perangkat Pembelajaran Siklus 2</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Selama penyusunan produk pembelajaran, kendala utama yang saya alami adalah kesulitan memetakan karakteristik dan kesiapan belajar peserta didik secara komprehensif. Di kelas tempat saya melaksanakan PPL, peserta didik memiliki rentang kemampuan kognitif dan gaya belajar yang sangat heterogen. Meskipun saya sudah melakukan asesmen diagnostik di awal, merumuskan rancangan pembelajaran berdiferensiasi (baik diferensiasi konten maupun proses) ke dalam Modul Ajar dan LKPD ternyata sangat menantang. Saya kesulitan menemukan titik keseimbangan antara menyederhanakan materi untuk siswa yang masih slow learner tanpa membuat siswa yang fast learner merasa bosan, sehingga proses penyusunan instrumen dan aktivitas belajar memakan waktu jauh lebih lama dari yang saya perkirakan.
+                    </p>
+	<a href="https://drive.google.com/drive/folders/1rH0YLRO6AMo5YUMtS3kOKWR4pXSeSIn7?usp=drive_link"><button class="w-full mt-auto py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i> Unduh / Lihat Dokumen Lengkap
+                    </button></a>
+                </div>
+			<!-- </div> -->
+			<!-- <div class="grid grid-cols-1 md:grid-cols-1 gap-6 lg:gap-8"> -->
+				<div class="bg-white rounded-xl p-8 mb-6 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-black-400 group">
+                    <div class="w-12 h-12 bg-black-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-book text-2xl text-black-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Analisis Perangkat Pembelajaran Siklus 3</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Selama penyusunan produk pembelajaran, kendala utama yang saya alami adalah kesulitan memetakan karakteristik dan kesiapan belajar peserta didik secara komprehensif. Di kelas tempat saya melaksanakan PPL, peserta didik memiliki rentang kemampuan kognitif dan gaya belajar yang sangat heterogen. Meskipun saya sudah melakukan asesmen diagnostik di awal, merumuskan rancangan pembelajaran berdiferensiasi (baik diferensiasi konten maupun proses) ke dalam Modul Ajar dan LKPD ternyata sangat menantang. Saya kesulitan menemukan titik keseimbangan antara menyederhanakan materi untuk siswa yang masih slow learner tanpa membuat siswa yang fast learner merasa bosan, sehingga proses penyusunan instrumen dan aktivitas belajar memakan waktu jauh lebih lama dari yang saya perkirakan.
+                    </p>
+	<a href="https://drive.google.com/drive/folders/17pby-9fOFDa8aPUTTOQ7rIVbZf9dLrMS?usp=drive_link"><button class="w-full mt-auto py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i> Unduh / Lihat Dokumen Lengkap
+                    </button></a>
+                </div>
+			<!-- </div> -->
+			
+
+            <!-- Cards Grid Layout untuk 4 Aspek -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                
+                <!-- Card A: Kendala -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-red-400 group">
+                    <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-triangle-exclamation text-2xl text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">A. Kendala Penyusunan</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Selama penyusunan produk pembelajaran, kendala utama yang saya alami adalah kesulitan memetakan karakteristik dan kesiapan belajar peserta didik secara komprehensif. Di kelas tempat saya melaksanakan PPL, peserta didik memiliki rentang kemampuan kognitif dan gaya belajar yang sangat heterogen. Meskipun saya sudah melakukan asesmen diagnostik di awal, merumuskan rancangan pembelajaran berdiferensiasi (baik diferensiasi konten maupun proses) ke dalam Modul Ajar dan LKPD ternyata sangat menantang. Saya kesulitan menemukan titik keseimbangan antara menyederhanakan materi untuk siswa yang masih slow learner tanpa membuat siswa yang fast learner merasa bosan, sehingga proses penyusunan instrumen dan aktivitas belajar memakan waktu jauh lebih lama dari yang saya perkirakan.
+                    </p>
+                </div>
+
+                <!-- Card B: Teori/Konsep -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-blue-500 group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-book-open text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">B. Adopsi Teori & Pedagogi</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Landasan utama pembuatan produk pembelajaran saya adalah filsafat Konstruktivisme, yang diimplementasikan melalui model Problem-Based Learning (PBL). Konsep pedagogi ini meyakini bahwa peserta didik membangun pengetahuannya sendiri melalui pengalaman nyata dan pemecahan masalah, bukan sekadar menerima informasi pasif dari guru. Penerapan pada produk: Hal ini tercermin secara jelas pada Modul Ajar dan LKPD yang saya susun. Pada langkah awal, saya tidak langsung memberikan materi materi, melainkan menyajikan orientasi masalah kontekstual (studi kasus) melalui media tayang. Selanjutnya, LKPD dirancang sebagai panduan bagi peserta didik untuk berdiskusi, menyelidiki, dan menemukan solusi secara mandiri dalam kelompok, di mana peran saya bergeser dari penceramah menjadi fasilitator.
+                    </p>
+                </div>
+
+                <!-- Card C: Keberhasilan -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-emerald-500 group">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chart-line text-2xl text-emerald-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">C. Faktor Keberhasilan</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Berdasarkan hasil refleksi penerapan di kelas, salah satu faktor utama yang membuat produk pembelajaran saya berhasil adalah penggunaan media pembelajaran yang interaktif dan visual. Sebelumnya, siswa cenderung pasif karena terbiasa dengan metode ceramah. Namun, ketika saya mengimplementasikan media yang saya kembangkan (misalnya: slide presentasi berbasis gamification / video animasi edukatif), tingkat atensi siswa meningkat drastis. Media ini berhasil mengkonkretkan materi yang abstrak menjadi lebih mudah dicerna, sehingga memantik rasa ingin tahu siswa sejak fase apersepsi hingga akhir kegiatan pembelajaran.
+                    </p>
+                </div>
+
+                <!-- Card D: Perubahan/Adaptasi -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-amber-500 group">
+                    <div class="w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-arrows-spin text-2xl text-amber-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">D. Adaptasi untuk Situasi Berbeda</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Jika produk ini diterapkan pada kelas dengan karakteristik siswa yang berbeda, khususnya jika rata-rata kemampuan kognitif dan daya tangkap siswa lebih rendah, komponen utama yang harus saya rombak adalah Lembar Kerja Peserta Didik (LKPD) dan Asesmen Formatif. Saya perlu mengubah instruksi pada LKPD menjadi lebih step-by-step (memberikan scaffolding atau perancah yang lebih banyak) agar siswa tidak frustrasi. Selain itu, saya perlu menyesuaikan bahan bacaan pada Modul Ajar agar menggunakan diksi yang lebih sederhana, serta memodifikasi rubrik penilaian agar target pencapaian (KKTP) lebih realistis dengan kondisi kesiapan belajar mereka saat itu.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. LAMPIRAN PENILAIAN -->
+        <section id="penilaian" class="page-section hidden opacity-0">
+            <div class="mb-10 text-center max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900 mb-3">Lampiran Penilaian PPL</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full mb-6"></div>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded text-left shadow-sm">
+                    <p class="text-blue-800 text-sm">
+                        <strong>Keterangan:</strong> Bagian ini berisi hasil penilaian otentik dari Guru Pamong terkait rancangan perangkat pembelajaran (Lampiran 7) dan praktik mengajar di kelas (Lampiran 8) yang telah dilaksanakan selama 3 siklus.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Lampiran 7 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col h-full">
+                    <div class="flex items-center gap-4 border-b pb-4 mb-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                            <i class="fa-solid fa-file-signature text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">Lampiran 7</h3>
+                            <p class="text-sm text-slate-500">Instrumen Penilaian Perangkat Pembelajaran</p>
                         </div>
                     </div>
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-600 mb-4">Dokumen ini memuat nilai dan catatan dari Guru Pamong terhadap Modul Ajar/RPP, Media, LKPD, dan Instrumen Penilaian yang disusun pada siklus 1 hingga 3.</p>
+                        
+                        <!-- Placeholder Tabel Sederhana (opsional, bisa diganti gambar atau embed PDF) -->
+                        <div class="overflow-x-auto mb-4 border rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-4 py-2 text-left font-medium text-gray-500">Siklus</th>
+                                        <th class="px-4 py-2 text-left font-medium text-gray-500">Materi</th>
+                                        <th class="px-4 py-2 text-left font-medium text-gray-500">Nilai</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-2">Siklus 1</td>
+                                        <td class="px-4 py-2">Sistem Pengapian</td>
+                                        <td class="px-4 py-2 font-semibold text-primary">A (90)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2">Siklus 2</td>
+                                        <td class="px-4 py-2">Sistem Air Conditioning</td>
+                                        <td class="px-4 py-2 font-semibold text-primary">A (92)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2">Siklus 3</td>
+                                        <td class="px-4 py-2">Sistem Audio Vidio</td>
+                                        <td class="px-4 py-2 font-semibold text-primary">A (95)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1kqLtL0-D64z64dAf4TrD9ny10-hhS5Du?usp=sharing"><button class="w-full mt-auto py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i> Unduh / Lihat Dokumen Lengkap
+                    </button></a>
+                </div>
+
+                <!-- Lampiran 8 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col h-full">
+                    <div class="flex items-center gap-4 border-b pb-4 mb-4">
+                        <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary">
+                            <i class="fa-solid fa-chalkboard-user text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">Lampiran 8</h3>
+                            <p class="text-sm text-slate-500">Instrumen Penilaian Praktik Mengajar</p>
+                        </div>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-600 mb-4">Dokumen ini berisi hasil evaluasi keterampilan mengajar (keterampilan membuka pelajaran, penguasaan materi, pengelolaan kelas) yang dinilai oleh Guru Pamong.</p>
+                        
+                        <div class="overflow-x-auto mb-4 border rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-4 py-2 text-left font-medium text-gray-500">Siklus</th>
+                                        <th class="px-4 py-2 text-left font-medium text-gray-500">Fokus Keterampilan</th>
+                                        <th class="px-4 py-2 text-left font-medium text-gray-500">Nilai</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-2">Siklus 1</td>
+                                        <td class="px-4 py-2">Pengelolaan Kelas</td>
+                                        <td class="px-4 py-2 font-semibold text-secondary">A (88)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2">Siklus 2</td>
+                                        <td class="px-4 py-2">Penggunaan Media</td>
+                                        <td class="px-4 py-2 font-semibold text-secondary">A (93)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2">Siklus 3</td>
+                                        <td class="px-4 py-2">Evaluasi Pembelajaran</td>
+                                        <td class="px-4 py-2 font-semibold text-secondary">A (96)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1akkyBvYf8IeodfgQDiKwnfI_liirJySI?usp=sharing" target="_blank"><button class="w-full mt-auto py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i> Unduh / Lihat Dokumen Lengkap
+                    </button></a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Artefak Pembelajaran -->
-    <section id="artefak" class="py-16 md:py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900">Artefak Pembelajaran</h2>
-                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Artifak yang disajikan bervariasi (RPP, media, contoh hasil kerja siswa, penilaian dari GP dan DPL, video, dll) dan sesuai dengan tujuan pembuatan e-portfolio. Kualitas artifak yang disajikan komprehensif untuk merepresentasikan kegiatan PPL Terbimbing.</p>
-                <div class="h-1 w-20 bg-ppg-500 mx-auto mt-4 rounded"></div>
+        <!-- 5. MODEL GURU YANG DITUJU -->
+        <section id="model-guru" class="page-section hidden opacity-0">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-3">Model Guru yang Dituju</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-600 font-serif max-w-2xl mx-auto">
+                    Rancangan misi, kompetensi, dan karakter ideal yang ingin saya bangun untuk menjadi seorang Guru Profesional abad ke-21.
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                    <div class="h-40 bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center text-white relative">
-                        <i class="fas fa-book-open text-5xl opacity-80 transition-transform group-hover:scale-110 duration-300"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Misi -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:-translate-y-2 transition-transform duration-300">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary text-white mb-6 shadow-lg shadow-blue-500/30">
+                        <i class="fa-solid fa-rocket text-2xl"></i>
                     </div>
-                    <div class="p-6">
-                        <div class="text-xs font-bold text-blue-600 tracking-wide uppercase mb-2">CP</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Capaian Pembelajaran</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                            Kompetensi minimum yang harus dicapai peserta didik. CP merupakan integrasi dari pengetahuan, keterampilan, dan sikap.
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Misi Pribadi</h3>
+                    <ul class="text-left space-y-3 text-slate-600 text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-secondary mt-1"></i>
+                            <span>Menyelenggarakan pembelajaran yang berpusat pada peserta didik dan bermakna yang berkeadilan untuk semua murid.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-secondary mt-1"></i>
+                            <span>Menjadikan ruang pembelajaran yang menyenangkan untuk semua murid.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-secondary mt-1"></i>
+                            <span>Menerapkan Pembelajaran yang aktif, partisipatif bagi murid.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Kompetensi -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:-translate-y-2 transition-transform duration-300">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary text-white mb-6 shadow-lg shadow-teal-500/30">
+                        <i class="fa-solid fa-brain text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Kompetensi Inti</h3>
+                    <ul class="text-left space-y-3 text-slate-600 text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-primary mt-1"></i>
+                            <span><strong>Pedagogik:</strong> Menguasai teori belajar dan karakteristik peserta didik.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-primary mt-1"></i>
+                            <span><strong>Profesional:</strong>Menguasai perkembangan teknologi otomotif.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-primary mt-1"></i>
+                            <span><strong>Digital:</strong> Mampu merancang media interaktif.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Karakter -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:-translate-y-2 transition-transform duration-300">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent text-white mb-6 shadow-lg shadow-amber-500/30">
+                        <i class="fa-solid fa-heart text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Karakter Pendidik</h3>
+                    <ul class="text-left space-y-3 text-slate-600 text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-accent mt-1"></i>
+                            <span><strong>Reflektif:</strong> Selalu mengevaluasi diri untuk perbaikan berkesinambungan.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-accent mt-1"></i>
+                            <span><strong>Empati:</strong> [Sikap kepedulian terhadap latar belakang siswa].</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-accent mt-1"></i>
+                            <span><strong>Inovatif:</strong> Berani mencoba metode baru yang relevan.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+		
+		<!-- 6. Refleksi -->
+         <section id="refleksi" class="page-section hidden opacity-0">
+            <div class="mb-10 text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900 mb-3">Refleksi Akhir & Filosofi</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-600 font-serif">
+                    Bagian ini memuat refleksi dan analisis mendalam terhadap produk pembelajaran (Perangkat Ajar, Media, atau Asesmen) yang telah disusun selama pelaksanaan PPL.
+                </p>
+            </div>
+			<!-- <div class="grid grid-cols-1 md:grid-cols-1 gap-6 lg:gap-8"> -->
+				<div class="bg-white rounded-xl p-8 mb-6 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-black-400 group">
+                    <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-book text-2xl text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Perangkat Pembelajaran</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Selama penyusunan produk pembelajaran, kendala utama yang saya alami adalah kesulitan memetakan karakteristik dan kesiapan belajar peserta didik secara komprehensif. Di kelas tempat saya melaksanakan PPL, peserta didik memiliki rentang kemampuan kognitif dan gaya belajar yang sangat heterogen. Meskipun saya sudah melakukan asesmen diagnostik di awal, merumuskan rancangan pembelajaran berdiferensiasi (baik diferensiasi konten maupun proses) ke dalam Modul Ajar dan LKPD ternyata sangat menantang. Saya kesulitan menemukan titik keseimbangan antara menyederhanakan materi untuk siswa yang masih slow learner tanpa membuat siswa yang fast learner merasa bosan, sehingga proses penyusunan instrumen dan aktivitas belajar memakan waktu jauh lebih lama dari yang saya perkirakan.
+                    </p>
+	<a href="https://drive.google.com/drive/folders/1Ly6UdoNSXCIh3ieunji6GR-t9QADeOe_?usp=sharing"><button class="w-full mt-auto py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i> Unduh / Lihat Dokumen Lengkap
+                    </button></a>
+                </div>
+			<!-- </div> -->
+			<!-- <div class="grid grid-cols-1 md:grid-cols-1 gap-6 lg:gap-8"> -->
+				<div class="bg-white rounded-xl p-8 mb-6 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-black-400 group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-book text-2xl text-blue-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Perangkat Pembelajaran</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Selama penyusunan produk pembelajaran, kendala utama yang saya alami adalah kesulitan memetakan karakteristik dan kesiapan belajar peserta didik secara komprehensif. Di kelas tempat saya melaksanakan PPL, peserta didik memiliki rentang kemampuan kognitif dan gaya belajar yang sangat heterogen. Meskipun saya sudah melakukan asesmen diagnostik di awal, merumuskan rancangan pembelajaran berdiferensiasi (baik diferensiasi konten maupun proses) ke dalam Modul Ajar dan LKPD ternyata sangat menantang. Saya kesulitan menemukan titik keseimbangan antara menyederhanakan materi untuk siswa yang masih slow learner tanpa membuat siswa yang fast learner merasa bosan, sehingga proses penyusunan instrumen dan aktivitas belajar memakan waktu jauh lebih lama dari yang saya perkirakan.
+                    </p>
+	<a href="https://drive.google.com/drive/folders/1Ly6UdoNSXCIh3ieunji6GR-t9QADeOe_?usp=sharing"><button class="w-full mt-auto py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i> Unduh / Lihat Dokumen Lengkap
+                    </button></a>
+                </div>
+			<!-- </div> -->
+        </section>
+
+        <!-- 7. DOKUMENTASI KEGIATAN -->
+        <section id="dokumentasi" class="page-section hidden opacity-0">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-3">Dokumentasi Kegiatan PPL</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-600 font-serif">Kumpulan rekam jejak aktivitas selama melaksanakan Praktik Pengalaman Lapangan.</p>
+            </div>
+
+            <!-- Grid 5 Rubrik -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- 1. Orientasi -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+                    <img src="bersama-pamong.jpeg" alt="Orientasi" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="text-xs font-bold text-primary uppercase mb-1">ORIENTASI</div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Pertemuan Pertama Bersama Guru Pamong</h3>
+                        <p class="text-sm text-slate-600 line-clamp-3">
+                            [Tulis deskripsi singkat kegiatan orientasi bersama kepala sekolah dan guru pamong. Pengenalan lingkungan sekolah dan budaya akademik.]
                         </p>
-                        <a href="https://docs.google.com/document/d/1GNs2Ibfez3TNILpy5gBF8RY8p7-VqQEl/edit?usp=sharing&ouid=113666436979877514631&rtpof=true&sd=true" class="inline-flex items-center text-ppg-600 font-semibold hover:text-ppg-800">
-                            Lihat Dokumen <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </a>
                     </div>
                 </div>
-
-                <!-- Card 2 -->
-                <div class="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                    <div class="h-40 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white relative">
-                        <i class="fas fa-laptop-code text-5xl opacity-80 transition-transform group-hover:scale-110 duration-300"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-xs font-bold text-purple-600 tracking-wide uppercase mb-2">Modul Ajar</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Modul Ajar Sistem AC</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                            Modul ini berisi tujuan, langkah, media pembelajaran, serta asesmen yang dibutuhkan untuk melaksanakan suatu unit pembelajaran.
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+                    <img src="serah-terima-mahasiswa-ppl.jpeg" alt="Orientasi" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="text-xs font-bold text-primary uppercase mb-1">ORIENTASI</div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Penyerahan Mahasiswa PPL Terbimbing secara Simbolis</h3>
+                        <p class="text-sm text-slate-600 line-clamp-3">
+                            [Tulis deskripsi singkat kegiatan orientasi bersama kepala sekolah dan guru pamong. Pengenalan lingkungan sekolah dan budaya akademik.]
                         </p>
-                        <a href="https://docs.google.com/document/d/1-_GMHOQRfOrAIEfm7Q-34YGZNLd_LDLJ/edit?usp=drive_link&ouid=113666436979877514631&rtpof=true&sd=true" class="inline-flex items-center text-ppg-600 font-semibold hover:text-ppg-800">
-                            Lihat Dokumen <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </a>
                     </div>
                 </div>
-
-                <!-- Card 3 -->
-                <div class="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                    <div class="h-40 bg-gradient-to-r from-emerald-500 to-teal-500 flex items-center justify-center text-white relative">
-                        <i class="fas fa-clipboard-check text-5xl opacity-80 transition-transform group-hover:scale-110 duration-300"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-xs font-bold text-emerald-600 tracking-wide uppercase mb-2">KKTP</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Kriteria Ketercapaian Tujuan Pembelajaran</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                            Serangkaian kriteria atau indikator yang menunjukkan sejauh mana peserta didik telah mencapai Tujuan Pembelajaran (TP) yang telah ditetapkan.
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+                    <img src="foto-bersama-penerimaan.jpeg" alt="Orientasi" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="text-xs font-bold text-primary uppercase mb-1">ORIENTASI</div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Foto Bersama Penerimaan Mahasiswa PPL Terbimbing</h3>
+                        <p class="text-sm text-slate-600 line-clamp-3">
+                            [Tulis deskripsi singkat kegiatan orientasi bersama kepala sekolah dan guru pamong. Pengenalan lingkungan sekolah dan budaya akademik.]
                         </p>
-                        <a href="https://docs.google.com/document/d/19cyDfgHo3X0Ru6aS1sDs3NTH38k_CZOi/edit?usp=sharing&ouid=113666436979877514631&rtpof=true&sd=true" class="inline-flex items-center text-ppg-600 font-semibold hover:text-ppg-800">
-                            Lihat Dokumen <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </a>
                     </div>
                 </div>
-            </div>
-            
-            <div class="mt-10 text-center">
-                <button class="px-6 py-2 border-2 border-ppg-500 text-ppg-600 font-semibold rounded-lg hover:bg-ppg-50 transition duration-300">
-                    Muat Artefak Lainnya
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Jurnal Refleksi -->
-    <section id="refleksi" class="py-16 md:py-24 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900">Jurnal Refleksi PPL</h2>
-                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Catatan reflektif kegiatan PPL Terbimbing menggunakan model STAR (Situation, Task, Action, Result).</p>
-                <div class="h-1 w-20 bg-ppg-500 mx-auto mt-4 rounded"></div>
-            </div>
-
-            <div class="space-y-8 max-w-4xl mx-auto">
-
-
-                <!-- Refleksi ORIENTASI -->
-                <div class="bg-white p-8 rounded-xl shadow-md border-l-4 border-gray-300 opacity-80 hover:opacity-100 transition">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold text-gray-900">Orientasi</h3>
-                        <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">Minggu ke-2 dan ke-3</span>
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+                    <img src="wawancara-wakasek.jpeg" alt="Orientasi" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="text-xs font-bold text-primary uppercase mb-1">ORIENTASI</div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Wawancara dengan Wakasek Kurikulum</h3>
+                        <p class="text-sm text-slate-600 line-clamp-3">
+                            [Tulis deskripsi singkat kegiatan orientasi bersama kepala sekolah dan guru pamong. Pengenalan lingkungan sekolah dan budaya akademik.]
+                        </p>
                     </div>
-                    <p class="text-gray-500 italic">
-                        [Tuliskan refleksi siklus 2 Anda di sini menggunakan alur pemikiran yang sama: Situation, Task, Action, Result.]
-                    </p>
                 </div>
 
-                <!-- Template for Refleksi Observasi -->
-                <div class="bg-white p-8 rounded-xl shadow-md border-l-4 border-gray-300 opacity-80 hover:opacity-100 transition">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold text-gray-900">Observasi</h3>
-                        <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">Minggu ke-2 dan ke-3</span>
+                <!-- 2. Observasi -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Observasi" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="text-xs font-bold text-secondary uppercase mb-1">Rubrik 2</div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Observasi Kelas & Sekolah</h3>
+                        <p class="text-sm text-slate-600 line-clamp-3">
+                            [Tulis deskripsi singkat observasi karakteristik peserta didik, pelaksanaan pembelajaran oleh guru model, serta manajemen sekolah.]
+                        </p>
                     </div>
-                    <p class="text-gray-500 italic">
-                        [Tuliskan refleksi siklus 2 Anda di sini menggunakan alur pemikiran yang sama: Situation, Task, Action, Result.]
-                    </p>
                 </div>
 
-                <!-- Template for Refleksi ASISTENSI MENGAJAR -->
-                <div class="bg-white p-8 rounded-xl shadow-md border-l-4 border-gray-300 opacity-80 hover:opacity-100 transition">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold text-gray-900">Asistensi Mengajar</h3>
-                        <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">Minggu Ke-4</span>
+                <!-- 3. Asistensi -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Asistensi" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="text-xs font-bold text-accent uppercase mb-1">Rubrik 3</div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Asistensi Mengajar</h3>
+                        <p class="text-sm text-slate-600 line-clamp-3">
+                            [Tulis deskripsi kegiatan membantu guru pamong dalam menyusun perangkat, media, mendampingi siswa, atau memeriksa tugas.]
+                        </p>
                     </div>
-                    <p class="text-gray-500 italic">
-                        [Tuliskan refleksi siklus 2 Anda di sini menggunakan alur pemikiran yang sama: Situation, Task, Action, Result.]
-                    </p>
                 </div>
 
-                <!-- Template for Refleksi PRAKTIK PEMBELAJARAN TERBIMBING -->
-                <div class="bg-white p-8 rounded-xl shadow-md border-l-4 border-gray-300 opacity-80 hover:opacity-100 transition">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold text-gray-900">Praktik Pembelajaran Terbimbing</h3>
-                        <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">Minggu Ke-5 sampai ke-15</span>
+                <!-- 4. Evaluasi -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Evaluasi" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="text-xs font-bold text-red-500 uppercase mb-1">Rubrik 4</div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Evaluasi Pembelajaran</h3>
+                        <p class="text-sm text-slate-600 line-clamp-3">
+                            [Tulis deskripsi pelaksanaan penilaian formatif/sumatif, analisis hasil belajar siswa, dan kegiatan remedial atau pengayaan.]
+                        </p>
                     </div>
-                    <p class="text-gray-500 italic">
-                        [Tuliskan refleksi siklus 2 Anda di sini menggunakan alur pemikiran yang sama: Situation, Task, Action, Result.]
-                    </p>
                 </div>
 
-                <!-- Template for Refleksi AKHIR -->
-                <div class="bg-white p-8 rounded-xl shadow-md border-l-4 border-gray-300 opacity-80 hover:opacity-100 transition">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold text-gray-900">Refleksi Akhir</h3>
-                        <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">Minggu Ke-16</span>
+                <!-- 5. Penutup -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 lg:col-span-1 md:col-span-2 lg:col-start-2">
+                    <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Penutup" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="text-xs font-bold text-purple-600 uppercase mb-1">Rubrik 5</div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Penutup & Penarikan</h3>
+                        <p class="text-sm text-slate-600 line-clamp-3">
+                            [Tulis deskripsi momen perpisahan, penyerahan kembali mahasiswa oleh sekolah mitra ke pihak kampus/LPTK.]
+                        </p>
                     </div>
-                    <p class="text-gray-500 italic">
-                        [Tuliskan refleksi siklus 2 Anda di sini menggunakan alur pemikiran yang sama: Situation, Task, Action, Result.]
-                    </p>
                 </div>
-
 
             </div>
-        </div>
-    </section>
-
-    <!-- Galeri/Dokumentasi -->
-    <section id="dokumentasi" class="py-16 md:py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900">Dokumentasi Kegiatan</h2>
-                <div class="h-1 w-20 bg-ppg-500 mx-auto mt-4 rounded"></div>
-            </div>
-
-            <!-- Image Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-
-
-
-                <!-- Gallery Item 1 -->
-<div class="group relative rounded-lg overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-    <img src="bersama-pamong.jpeg" alt="Kegiatan Pendahuluan" class="w-full h-full object-cover relative z-10 transition duration-300 group-hover:scale-110">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-20 flex flex-col justify-end p-4">
-        <p class="text-gray-300 text-sm">Pertemuan perdana bersama pamong</p>
-    </div>
-</div>
-
- <!-- Gallery Item 2 -->
-<div class="group relative rounded-lg overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-    <img src="foto-bersama-penerimaan.jpeg" alt="Kegiatan Pendahuluan" class="w-full h-full object-cover relative z-10 transition duration-300 group-hover:scale-110">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-20 flex flex-col justify-end p-4">
-        <p class="text-gray-300 text-sm">Penerimaan mahasiswa PPL</p>
-    </div>
-</div>
-
- <!-- Gallery Item 3 -->
-<div class="group relative rounded-lg overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-    <img src="serah-terima-mahasiswa-ppl.jpeg" alt="Kegiatan Pendahuluan" class="w-full h-full object-cover relative z-10 transition duration-300 group-hover:scale-110">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-20 flex flex-col justify-end p-4">
-        <p class="text-gray-300 text-sm">Serah terima mahasiswa PPL</p>
-    </div>
-</div>
-
- <!-- Gallery Item 4 -->
-<div class="group relative rounded-lg overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-    <img src="menyambut-murid.jpeg" alt="Kegiatan Pendahuluan" class="w-full h-full object-cover relative z-10 transition duration-300 group-hover:scale-110">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-20 flex flex-col justify-end p-4">
-         <p class="text-gray-300 text-sm">Menyambut murid</p>
-    </div>
-</div>
-
- <!-- Gallery Item 5 -->
-<div class="group relative rounded-lg overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-    <img src="wawancara-wakasek.jpeg" alt="Kegiatan Pendahuluan" class="w-full h-full object-cover relative z-10 transition duration-300 group-hover:scale-110">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-20 flex flex-col justify-end p-4">
-          <p class="text-gray-300 text-sm">Wawancara wakasek kurikulum</p>
-    </div>
-</div>
-
- <!-- Gallery Item 6 -->
-<div class="group relative rounded-lg overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-    <img src="asistensi-mengajar-2.jpeg" alt="Kegiatan Pendahuluan" class="w-full h-full object-cover relative z-10 transition duration-300 group-hover:scale-110">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-20 flex flex-col justify-end p-4">
-        <p class="text-gray-300 text-sm">Asistensi mengajar</p>
-    </div>
-</div>
-
- <!-- Gallery Item 7 -->
-<div class="group relative rounded-lg overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-    <img src="asistensi-mengajar.jpeg" alt="Kegiatan Pendahuluan" class="w-full h-full object-cover relative z-10 transition duration-300 group-hover:scale-110">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-20 flex flex-col justify-end p-4">
-        <p class="text-gray-300 text-sm">Asistensi mengajar</p>
-    </div>
-</div>
-
- <!-- Gallery Item 8 -->
-<div class="group relative rounded-lg overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-    <img src="asistensi-mengajar-1.jpeg" alt="Kegiatan Pendahuluan" class="w-full h-full object-cover relative z-10 transition duration-300 group-hover:scale-110">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-20 flex flex-col justify-end p-4">
-        <p class="text-gray-300 text-sm">Asistensi mengajar</p>
-    </div>
-</div>
-
- <!-- Gallery Item 9 -->
-<div class="group relative rounded-lg overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-    <img src="asistensi-mengajar-3.jpeg" alt="Kegiatan Pendahuluan" class="w-full h-full object-cover relative z-10 transition duration-300 group-hover:scale-110">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-20 flex flex-col justify-end p-4">
-        <p class="text-gray-300 text-sm">Asistensi mengajar</p>
-    </div>
-</div>
-
- <!-- Gallery Item 10 -->
-<div class="group relative rounded-lg overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-    <img src="wawancara-murid.jpeg" alt="Kegiatan Pendahuluan" class="w-full h-full object-cover relative z-10 transition duration-300 group-hover:scale-110">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-20 flex flex-col justify-end p-4">
-        <p class="text-gray-300 text-sm">Wawancarai murid</p>
-    </div>
-</div>
-
- <!-- Gallery Item 11 -->
-<div class="group relative rounded-lg overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-    <img src="halal-bihalal.jpeg" alt="Kegiatan Pendahuluan" class="w-full h-full object-cover relative z-10 transition duration-300 group-hover:scale-110">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-20 flex flex-col justify-end p-4">
-        <p class="text-gray-300 text-sm">Halal bi Halal</p>
-    </div>
-</div>
-
- <!-- Gallery Item 12 -->
-<div class="group relative rounded-lg overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-    <img src="menyambut-murid.jpeg" alt="Kegiatan Pendahuluan" class="w-full h-full object-cover relative z-10 transition duration-300 group-hover:scale-110">
-    
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-20 flex flex-col justify-end p-4">
-        <p class="text-gray-300 text-sm">Menyambut murid</p>
-    </div>
-</div>
-            </div>
-        </div>
-    </section>
+        </section>
+		
+		
+		
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-10 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0 text-center md:text-left">
-                    <h3 class="text-2xl font-bold text-white mb-2">E-Portfolio <span class="text-ppg-500">PPG</span></h3>
-                    <p class="text-sm text-gray-400">Tugas Ujian Tengah Semester (UTS)<br>PPL Terbimbing - PPG Calon Guru 2026</p>
-                </div>
-                
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition transform hover:scale-110">
-                        <span class="sr-only">Email</span>
-                        <i class="fas fa-envelope text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition transform hover:scale-110">
-                        <span class="sr-only">LinkedIn</span>
-                        <i class="fab fa-linkedin text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition transform hover:scale-110">
-                        <span class="sr-only">YouTube</span>
-                        <i class="fab fa-youtube text-xl"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="mt-8 pt-8 border-t border-gray-800 text-sm text-center text-gray-500">
-                &copy; 2026 wahyudin. Dibuat untuk pemenuhan tugas PPG Calon Guru.
-            </div>
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-sm">
+                &copy; <script>document.write(new Date().getFullYear())</script> E-Portfolio PPL Terbimbing PPG Calon Guru. Disusun oleh <span class="text-white font-medium">ROESMANG</span>.
+            </p>
         </div>
     </footer>
 
-    <!-- JavaScript for Mobile Menu & Smooth Scroll -->
+    <!-- JavaScript for Navigation & Interactivity -->
     <script>
-        // Toggle mobile menu
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navLinksMobile = document.querySelectorAll('.nav-link-mobile');
+            const sections = document.querySelectorAll('.page-section');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
+            // Function to change active section
+            const switchSection = (targetId) => {
+                // 1. Hide all sections and reset animation
+                sections.forEach(sec => {
+                    sec.classList.add('hidden');
+                    sec.classList.remove('animate-fade-in');
+                });
 
-        // Close mobile menu on click link
-        const links = menu.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
+                // 2. Show target section and trigger animation
+                const targetSec = document.getElementById(targetId);
+                targetSec.classList.remove('hidden');
+                // Timeout needed to restart CSS animation
+                setTimeout(() => targetSec.classList.add('animate-fade-in'), 10);
+
+                // 3. Update Desktop Navbar styling
+                navLinks.forEach(link => {
+                    link.classList.remove('text-primary', 'border-primary');
+                    link.classList.add('text-gray-500', 'border-transparent');
+                    if (link.getAttribute('data-target') === targetId) {
+                        link.classList.remove('text-gray-500', 'border-transparent');
+                        link.classList.add('text-primary', 'border-primary');
+                    }
+                });
+
+                // 4. Update Mobile Navbar styling & close menu
+                navLinksMobile.forEach(link => {
+                    link.classList.remove('text-primary', 'bg-indigo-50');
+                    link.classList.add('text-gray-600');
+                    if (link.getAttribute('data-target') === targetId) {
+                        link.classList.remove('text-gray-600');
+                        link.classList.add('text-primary', 'bg-indigo-50');
+                    }
+                });
+                mobileMenu.classList.add('hidden'); // auto-close menu on mobile
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            // Add Event Listeners to Desktop Links
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetId = e.target.getAttribute('data-target');
+                    switchSection(targetId);
+                });
             });
-        });
 
-        // Change navbar background on scroll
-        const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                nav.classList.add('shadow-md');
-                nav.classList.remove('shadow-sm');
-            } else {
-                nav.classList.remove('shadow-md');
-                nav.classList.add('shadow-sm');
-            }
+            // Add Event Listeners to Mobile Links
+            navLinksMobile.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetId = e.target.getAttribute('data-target');
+                    switchSection(targetId);
+                });
+            });
+
+            // Toggle Mobile Menu
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
         });
     </script>
 </body>
